@@ -9,3 +9,8 @@ python-dotenv
 alembic
 pydantic-settings
 email-validator
+pytest
+pytest-asyncio
+httpx
+ruff
+pytest-cov
