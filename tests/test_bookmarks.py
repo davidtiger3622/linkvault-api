@@ -33,7 +33,9 @@ def test_create_bookmark_without_auth_fails(client):
 
 def test_create_duplicate_url_fails(client, auth_headers):
     client.post("/bookmarks", json={"name": "GitHub", "url": "https://github.com"}, headers=auth_headers)
-    response = client.post("/bookmarks", json={"name": "GitHub Again", "url": "https://github.com"}, headers=auth_headers)
+    response = client.post(
+        "/bookmarks", json={"name": "GitHub Again", "url": "https://github.com"}, headers=auth_headers
+    )
     assert response.status_code == 409
 
 
@@ -74,7 +76,9 @@ def test_sort_alphabetical(client, auth_headers):
 
 
 def test_update_bookmark_name(client, auth_headers):
-    create_response = client.post("/bookmarks", json={"name": "Old Name", "url": "https://example.com"}, headers=auth_headers)
+    create_response = client.post(
+        "/bookmarks", json={"name": "Old Name", "url": "https://example.com"}, headers=auth_headers
+    )
     bookmark_id = create_response.json()["id"]
 
     response = client.patch(f"/bookmarks/{bookmark_id}", json={"name": "New Name"}, headers=auth_headers)
@@ -83,9 +87,10 @@ def test_update_bookmark_name(client, auth_headers):
 
 
 def test_toggle_favorite(client, auth_headers):
-    create_response = client.post("/bookmarks", json={"name": "Favme", "url": "https://favme.com"}, headers=auth_headers)
+    create_response = client.post(
+        "/bookmarks", json={"name": "Favme", "url": "https://favme.com"}, headers=auth_headers
+    )
     bookmark_id = create_response.json()["id"]
-
     response = client.patch(f"/bookmarks/{bookmark_id}", json={"is_favorite": True}, headers=auth_headers)
     assert response.status_code == 200
     assert response.json()["is_favorite"] is True
