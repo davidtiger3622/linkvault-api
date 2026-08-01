@@ -2,8 +2,8 @@
 
 The backend for [LinkVault](https://linkvault-web-nine.vercel.app) — a bookmarks manager with auto-fetched favicons, search, sorting, favorites, and password reset.
 
-**Live API:** https://linkvault-api-fbdv.onrender.com
 **Live frontend:** https://linkvault-web-nine.vercel.app
+**Live API health check:** https://linkvault-api-fbdv.onrender.com/health
 **API docs (Swagger):** https://linkvault-api-fbdv.onrender.com/docs
 
 > Note: the API runs on Render's free tier, which spins down after inactivity. The first request after idle time may take up to 50 seconds to respond.
