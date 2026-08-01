@@ -24,6 +24,14 @@ def create_bookmark(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    existing = (
+        db.query(Bookmark)
+        .filter(Bookmark.owner_id == current_user.id, Bookmark.url == payload.url)
+        .first()
+    )
+    if existing:
+        raise HTTPException(status_code=409, detail="This link is already saved — try searching for it instead")
+
     bookmark = Bookmark(
         name=payload.name,
         url=payload.url,
